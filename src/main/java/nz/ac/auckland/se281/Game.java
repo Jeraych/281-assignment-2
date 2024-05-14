@@ -7,6 +7,7 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class Game {
 
   private int roundCount;
+  private String input;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -17,6 +18,8 @@ public class Game {
   public void play() {
     roundCount++;
     MessageCli.START_ROUND.printMessage(Integer.toString(roundCount));
+    MessageCli.ASK_INPUT.printMessage();
+    input = Utils.scanner.nextLine();
   }
 
   public void endGame() {}
