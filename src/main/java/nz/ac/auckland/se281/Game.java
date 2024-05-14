@@ -10,6 +10,7 @@ public class Game {
   private String input;
   private int inputInt;
   private String playerName;
+  private boolean inputInvalid;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -21,16 +22,24 @@ public class Game {
   public void play() {
     roundCount++;
     MessageCli.START_ROUND.printMessage(Integer.toString(roundCount));
-    MessageCli.ASK_INPUT.printMessage();
-    input = Utils.scanner.nextLine();
-    try {
-      inputInt = Integer.parseInt(input);
-    } catch (Exception e) {
-      MessageCli.INVALID_INPUT.printMessage();
+
+    inputInvalid = true;
+    while (inputInvalid) {
+      MessageCli.ASK_INPUT.printMessage();
+      input = Utils.scanner.nextLine();
+      try {
+        inputInt = Integer.parseInt(input);
+      } catch (Exception e) {
+        MessageCli.INVALID_INPUT.printMessage();
+        continue;
+      }
+      if (inputInt < 0 || inputInt > 5) {
+        MessageCli.INVALID_INPUT.printMessage();
+        continue;
+      }
+      inputInvalid = false;
     }
-    if (inputInt < 0 || inputInt > 5) {
-      MessageCli.INVALID_INPUT.printMessage();
-    }
+    
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
   }
 
