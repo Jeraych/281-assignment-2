@@ -11,6 +11,7 @@ public class Game {
   private int inputInt;
   private String playerName;
   private boolean inputInvalid;
+  private final String ROBOT_NAME = "HAL-9000";
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -41,6 +42,9 @@ public class Game {
     }
     
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
+
+    ChooseStrategy botStrategy = new ChooseStrategy(new Random());
+    MessageCli.PRINT_INFO_HAND.printMessage(ROBOT_NAME, botStrategy.playFinger());
   }
 
   public void endGame() {}
