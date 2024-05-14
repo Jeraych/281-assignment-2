@@ -9,10 +9,12 @@ public class Game {
   private int roundCount;
   private String input;
   private int inputInt;
+  private String playerName;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
     roundCount = 0;
+    playerName = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
   }
 
@@ -29,6 +31,7 @@ public class Game {
     if (inputInt < 0 || inputInt > 5) {
       MessageCli.INVALID_INPUT.printMessage();
     }
+    MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
   }
 
   public void endGame() {}
