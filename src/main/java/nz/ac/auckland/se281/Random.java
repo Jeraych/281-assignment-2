@@ -4,7 +4,7 @@ public class Random implements BotPlayStyle {
 
     @Override
     public String chooseFinger() {
-        return "1";
+        return Integer.toString(Utils.getRandomNumberRange(0, 5));
     }
     
 }
