@@ -26,7 +26,7 @@ public class Game {
     } catch (Exception e) {
       MessageCli.INVALID_INPUT.printMessage();
     }
-    if (inputInt > 5) {
+    if (inputInt < 0 || inputInt > 5) {
       MessageCli.INVALID_INPUT.printMessage();
     }
   }
