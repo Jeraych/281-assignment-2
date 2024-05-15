@@ -2,14 +2,11 @@ package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Choice;
 
-public class Easy implements Bot {
+public class EasyBot implements Bot {
 
-  private Choice choice;
   private Strategy strategy;
 
-  public Easy(Choice choice) {
-    this.choice = choice;
-  }
+  public EasyBot(Choice choice) {}
 
   public void setStrategy(Strategy strategy) {
     this.strategy = strategy;

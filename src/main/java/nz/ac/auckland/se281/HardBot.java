@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import nz.ac.auckland.se281.Main.Choice;
 
-public class Hard implements Bot {
+public class HardBot implements Bot {
 
   private Choice choice;
   private Strategy strategy;
   private List<Integer> history;
   private boolean switched = false;
 
-  public Hard(Choice choice) {
+  public HardBot(Choice choice) {
     this.choice = choice;
     history = new ArrayList<>();
   }

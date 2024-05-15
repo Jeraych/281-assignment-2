@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import nz.ac.auckland.se281.Main.Choice;
 
-public class Medium implements Bot {
+public class MediumBot implements Bot {
 
   private Choice choice;
   private Strategy strategy;
   private List<Integer> history;
 
-  public Medium(Choice choice) {
+  public MediumBot(Choice choice) {
     this.choice = choice;
     history = new ArrayList<>();
   }

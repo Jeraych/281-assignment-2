@@ -11,13 +11,13 @@ public class Game {
   private int inputInt;
   private String playerName;
   private boolean inputInvalid;
-  private final String ROBOT_NAME = "HAL-9000";
+  private String botName = "HAL-9000";
   private String botInput;
   private int botInputInt;
   private Choice played;
   private int roundSum;
   private Difficulty level;
-  private Bot HAL9000;
+  private Bot bot;
   private boolean playerWon;
   private boolean gameStart = false;
   private int roundWonPlayer;
@@ -30,7 +30,7 @@ public class Game {
     playerName = options[0];
     played = choice;
     level = difficulty;
-    HAL9000 = BotFactory.createBot(level, choice);
+    bot = BotFactory.createBot(level, choice);
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     gameStart = true;
     roundWonPlayer = 0;
@@ -67,8 +67,8 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
     // HAL-9000 plays a finger
-    botInput = HAL9000.playFinger(roundCount, inputInt, playerWon);
-    MessageCli.PRINT_INFO_HAND.printMessage(ROBOT_NAME, botInput);
+    botInput = bot.playFinger(roundCount, inputInt, playerWon);
+    MessageCli.PRINT_INFO_HAND.printMessage(botName, botInput);
 
     // Determine round winner
     botInputInt = Integer.parseInt(botInput);
@@ -81,7 +81,7 @@ public class Game {
         playerWon = true;
         roundWonPlayer++;
       } else {
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "EVEN", ROBOT_NAME);
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "EVEN", botName);
         playerWon = false;
         roundWonBot++;
       }
@@ -94,7 +94,7 @@ public class Game {
         playerWon = true;
         roundWonPlayer++;
       } else {
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "ODD", ROBOT_NAME);
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "ODD", botName);
         playerWon = false;
         roundWonBot++;
       }
@@ -119,7 +119,7 @@ public class Game {
 
     // detect if HAL9000 is the winner
     if (roundWonBot > roundWonPlayer) {
-      MessageCli.PRINT_END_GAME.printMessage(ROBOT_NAME);
+      MessageCli.PRINT_END_GAME.printMessage(botName);
       gameStart = false;
       return;
     }
@@ -127,7 +127,6 @@ public class Game {
     // if game is a tie
     MessageCli.PRINT_END_GAME_TIE.printMessage();
     gameStart = false;
-    return;
   }
 
   public void showStats() {
@@ -145,6 +144,6 @@ public class Game {
 
     // display message of rounds won by HAL9000
     MessageCli.PRINT_PLAYER_WINS.printMessage(
-        ROBOT_NAME, Integer.toString(roundWonBot), Integer.toString(roundCount - roundWonBot));
+        botName, Integer.toString(roundWonBot), Integer.toString(roundCount - roundWonBot));
   }
 }
