@@ -23,6 +23,15 @@ public class Game {
   private int roundWonPlayer;
   private int roundWonBot;
 
+  /**
+   * Starts a blank new game even if there is already one started, resets everything to initial
+   * state and declare the difficulty and win condition chosen by the player, stores the player's
+   * name
+   *
+   * @param difficulty how difficult the player wishes to play against the bot
+   * @param choice how the player would like to play in order to win a round
+   * @param options name of the player
+   */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
     // starting a new game by resetting everything to initial
@@ -37,6 +46,11 @@ public class Game {
     roundWonBot = 0;
   }
 
+  /**
+   * Plays a round of game if the game has been started. Displays the number of rounds played and
+   * asks the player to enter a number between 0 and 5 to play a finger. The bot plays a finger
+   * after the player. Determines the winner of the current round.
+   */
   public void play() {
     if (!gameStart) {
       MessageCli.GAME_NOT_STARTED.printMessage();
@@ -101,6 +115,11 @@ public class Game {
     }
   }
 
+  /**
+   * Cannot end a game if none has been started. Shows the results/stats of the current game played
+   * so far, then determine the winner of game with all the rounds played, possible tie if both the
+   * player and bot wins equal amount of rounds.
+   */
   public void endGame() {
     // detect unstarted game
     if (!gameStart) {
@@ -129,6 +148,10 @@ public class Game {
     gameStart = false;
   }
 
+  /**
+   * Displays error message if the game has not been started. Displays the number of games won by
+   * the player and the bot
+   */
   public void showStats() {
     // detect unstarted game
     if (!gameStart) {
