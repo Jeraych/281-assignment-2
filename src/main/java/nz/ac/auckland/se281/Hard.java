@@ -24,6 +24,7 @@ public class Hard implements Bot {
   public String playFinger(int round, int playerInput, boolean loss) {
 
     if (round > 3) {
+      // switch to other strategy if HAL9000 lost previous round
       if (loss) {
         switched = !switched;
       }

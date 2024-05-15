@@ -5,6 +5,7 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 public class BotFactory {
   public static Bot createBot(Difficulty level, Choice choice) {
+    // creates different level of HAL9000 depends on input
     switch (level) {
       case EASY:
         return new Easy(choice);

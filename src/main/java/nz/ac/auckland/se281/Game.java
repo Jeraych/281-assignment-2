@@ -25,6 +25,7 @@ public class Game {
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
+    // starting a new game by resetting everything to initial
     roundCount = 0;
     playerName = options[0];
     played = choice;
@@ -101,36 +102,48 @@ public class Game {
   }
 
   public void endGame() {
+    // detect unstarted game
     if (!gameStart) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+
     this.showStats();
+
+    // detect if player is the winner
     if (roundWonPlayer > roundWonBot) {
       MessageCli.PRINT_END_GAME.printMessage(playerName);
       gameStart = false;
       return;
     }
+
+    // detect if HAL9000 is the winner
     if (roundWonBot > roundWonPlayer) {
       MessageCli.PRINT_END_GAME.printMessage(ROBOT_NAME);
       gameStart = false;
       return;
     }
+
+    // if game is a tie
     MessageCli.PRINT_END_GAME_TIE.printMessage();
     gameStart = false;
     return;
   }
 
   public void showStats() {
+    // detect unstarted game
     if (!gameStart) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+
+    // display message of rounds won by player
     MessageCli.PRINT_PLAYER_WINS.printMessage(
         playerName,
         Integer.toString(roundWonPlayer),
         Integer.toString(roundCount - roundWonPlayer));
 
+    // display message of rounds won by HAL9000
     MessageCli.PRINT_PLAYER_WINS.printMessage(
         ROBOT_NAME, Integer.toString(roundWonBot), Integer.toString(roundCount - roundWonBot));
   }
