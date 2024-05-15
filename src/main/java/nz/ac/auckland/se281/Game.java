@@ -105,6 +105,20 @@ public class Game {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+    this.showStats();
+    if (roundWonPlayer > roundWonBot) {
+      MessageCli.PRINT_END_GAME.printMessage(playerName);
+      gameStart = false;
+      return;
+    }
+    if (roundWonBot > roundWonPlayer) {
+      MessageCli.PRINT_END_GAME.printMessage(ROBOT_NAME);
+      gameStart = false;
+      return;
+    }
+    MessageCli.PRINT_END_GAME_TIE.printMessage();
+    gameStart = false;
+    return;
   }
 
   public void showStats() {
