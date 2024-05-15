@@ -1,13 +1,13 @@
 package nz.ac.auckland.se281;
 
 public class ChooseStrategy {
-    private final BotPlayStyle strategy;
+  private final Strategy strategy;
 
-    public ChooseStrategy(BotPlayStyle strategy) {
-        this.strategy = strategy;
-    }
+  public ChooseStrategy(Strategy strategy) {
+    this.strategy = strategy;
+  }
 
-    public String playFinger() {
-        return strategy.chooseFinger();
-    }
+  public String setStrategy() {
+    return strategy.chooseFinger();
+  }
 }

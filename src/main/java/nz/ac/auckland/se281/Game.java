@@ -16,12 +16,16 @@ public class Game {
   private int botInputInt;
   private Choice played;
   private int roundSum;
+  private Difficulty level;
+  private Bot HAL9000;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
     roundCount = 0;
     playerName = options[0];
     played = choice;
+    level = difficulty;
+    HAL9000 = BotFactory.createBot(level, choice);
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
   }
 
@@ -47,18 +51,17 @@ public class Game {
       }
       inputInvalid = false;
     }
-    
+
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
     // HAL-9000 plays a finger
-    ChooseStrategy botStrategy = new ChooseStrategy(new Random());
-    botInput = botStrategy.playFinger();
+    botInput = HAL9000.playFinger(roundCount, inputInt);
     MessageCli.PRINT_INFO_HAND.printMessage(ROBOT_NAME, botInput);
 
     // Determine round winner
     botInputInt = Integer.parseInt(botInput);
     roundSum = inputInt + botInputInt;
-    
+
     // round when number is EVEN, wins by choosing EVEN
     if (Utils.isEven(roundSum)) {
       if (played == Choice.EVEN) {
