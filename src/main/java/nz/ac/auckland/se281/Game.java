@@ -92,7 +92,17 @@ public class Game {
     }
   }
 
-  public void endGame() {}
+  public void endGame() {
+    if (!gameStart) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+  }
 
-  public void showStats() {}
+  public void showStats() {
+    if (!gameStart) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+  }
 }
