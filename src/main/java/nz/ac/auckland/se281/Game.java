@@ -26,7 +26,7 @@ public class Game {
   /**
    * Starts a blank new game even if there is already one started, resets everything to initial
    * state and declare the difficulty and win condition chosen by the player, stores the player's
-   * name
+   * name.
    *
    * @param difficulty how difficult the player wishes to play against the bot
    * @param choice how the player would like to play in order to win a round
