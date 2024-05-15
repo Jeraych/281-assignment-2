@@ -9,6 +9,7 @@ public class Hard implements Bot {
   private Choice choice;
   private Strategy strategy;
   private List<Integer> history;
+  private boolean switched = false;
 
   public Hard(Choice choice) {
     this.choice = choice;
@@ -20,12 +21,22 @@ public class Hard implements Bot {
   }
 
   @Override
-  public String playFinger(int round, int playerInput) {
+  public String playFinger(int round, int playerInput, boolean loss) {
 
     if (round > 3) {
-      this.setStrategy(new Top(choice, history));
+      if (loss) {
+        switched = !switched;
+      }
+      if (switched) {
+        this.setStrategy(new Top(choice, history));
+        System.out.println("Top strategy!");
+      } else {
+        this.setStrategy(new Random());
+        System.out.println("Random strategy!");
+      }
     } else {
       this.setStrategy(new Random());
+      System.out.println("Random strategy!");
     }
     history.add(playerInput);
     return strategy.chooseFinger();

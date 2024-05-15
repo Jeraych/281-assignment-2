@@ -16,7 +16,7 @@ public class Easy implements Bot {
   }
 
   @Override
-  public String playFinger(int round, int playerInput) {
+  public String playFinger(int round, int playerInput, boolean loss) {
     this.setStrategy(new Random());
     return strategy.chooseFinger();
   }

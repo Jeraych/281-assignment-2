@@ -18,6 +18,7 @@ public class Game {
   private int roundSum;
   private Difficulty level;
   private Bot HAL9000;
+  private boolean playerWon;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -55,7 +56,7 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
     // HAL-9000 plays a finger
-    botInput = HAL9000.playFinger(roundCount, inputInt);
+    botInput = HAL9000.playFinger(roundCount, inputInt, playerWon);
     MessageCli.PRINT_INFO_HAND.printMessage(ROBOT_NAME, botInput);
 
     // Determine round winner
@@ -66,8 +67,10 @@ public class Game {
     if (Utils.isEven(roundSum)) {
       if (played == Choice.EVEN) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "EVEN", playerName);
+        playerWon = true;
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "EVEN", ROBOT_NAME);
+        playerWon = false;
       }
     }
 
@@ -75,8 +78,10 @@ public class Game {
     if (Utils.isOdd(roundSum)) {
       if (played == Choice.ODD) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "ODD", playerName);
+        playerWon = true;
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "ODD", ROBOT_NAME);
+        playerWon = false;
       }
     }
   }
