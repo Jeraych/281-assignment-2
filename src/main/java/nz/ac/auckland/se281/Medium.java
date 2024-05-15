@@ -1,19 +1,18 @@
 package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
+import java.util.List;
 import nz.ac.auckland.se281.Main.Choice;
-import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Medium implements Bot {
 
-  private Difficulty level;
   private Choice choice;
   private Strategy strategy;
-  private ArrayList history = new ArrayList<>();
+  private List<Integer> history;
 
-  public Medium(Difficulty level, Choice choice) {
-    this.level = level;
+  public Medium(Choice choice) {
     this.choice = choice;
+    history = new ArrayList<>();
   }
 
   public void setStrategy(Strategy strategy) {
@@ -22,12 +21,13 @@ public class Medium implements Bot {
 
   @Override
   public String playFinger(int round, int playerInput) {
+
     if (round > 3) {
-      this.setStrategy(new Top());
+      this.setStrategy(new Top(choice, history));
     } else {
       this.setStrategy(new Random());
     }
-
+    history.add(playerInput);
     return strategy.chooseFinger();
   }
 }

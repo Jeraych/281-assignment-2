@@ -7,11 +7,11 @@ public class BotFactory {
   public static Bot createBot(Difficulty level, Choice choice) {
     switch (level) {
       case EASY:
-        return new Easy(level, choice);
+        return new Easy(choice);
       case MEDIUM:
-        return new Medium(level, choice);
+        return new Medium(choice);
       case HARD:
-        return new Hard(level, choice);
+        return new Hard(choice);
 
       default:
         System.err.println("Choose between EASY, MEDIUM, and HARD");

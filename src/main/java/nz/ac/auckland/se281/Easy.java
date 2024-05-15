@@ -1,16 +1,13 @@
 package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Choice;
-import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Easy implements Bot {
 
-  private Difficulty level;
   private Choice choice;
   private Strategy strategy;
 
-  public Easy(Difficulty level, Choice choice) {
-    this.level = level;
+  public Easy(Choice choice) {
     this.choice = choice;
   }
 
