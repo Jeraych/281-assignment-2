@@ -19,6 +19,7 @@ public class Game {
   private Difficulty level;
   private Bot HAL9000;
   private boolean playerWon;
+  private boolean gameStart = false;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -28,9 +29,14 @@ public class Game {
     level = difficulty;
     HAL9000 = BotFactory.createBot(level, choice);
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
+    gameStart = true;
   }
 
   public void play() {
+    if (!gameStart) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
     // start round number
     roundCount++;
     MessageCli.START_ROUND.printMessage(Integer.toString(roundCount));

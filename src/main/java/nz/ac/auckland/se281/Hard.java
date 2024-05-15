@@ -29,14 +29,11 @@ public class Hard implements Bot {
       }
       if (switched) {
         this.setStrategy(new Top(choice, history));
-        System.out.println("Top strategy!");
       } else {
         this.setStrategy(new Random());
-        System.out.println("Random strategy!");
       }
     } else {
       this.setStrategy(new Random());
-      System.out.println("Random strategy!");
     }
     history.add(playerInput);
     return strategy.chooseFinger();
