@@ -20,6 +20,8 @@ public class Game {
   private Bot HAL9000;
   private boolean playerWon;
   private boolean gameStart = false;
+  private int roundWonPlayer;
+  private int roundWonBot;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -30,6 +32,8 @@ public class Game {
     HAL9000 = BotFactory.createBot(level, choice);
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     gameStart = true;
+    roundWonPlayer = 0;
+    roundWonBot = 0;
   }
 
   public void play() {
@@ -69,25 +73,29 @@ public class Game {
     botInputInt = Integer.parseInt(botInput);
     roundSum = inputInt + botInputInt;
 
-    // round when number is EVEN, wins by choosing EVEN
+    // round when number is EVEN, player wins by choosing EVEN
     if (Utils.isEven(roundSum)) {
       if (played == Choice.EVEN) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "EVEN", playerName);
         playerWon = true;
+        roundWonPlayer++;
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "EVEN", ROBOT_NAME);
         playerWon = false;
+        roundWonBot++;
       }
     }
 
-    // round when number is ODD, wins by choosing ODD
+    // round when number is ODD, player wins by choosing ODD
     if (Utils.isOdd(roundSum)) {
       if (played == Choice.ODD) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "ODD", playerName);
         playerWon = true;
+        roundWonPlayer++;
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(roundSum), "ODD", ROBOT_NAME);
         playerWon = false;
+        roundWonBot++;
       }
     }
   }
@@ -104,5 +112,12 @@ public class Game {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        playerName,
+        Integer.toString(roundWonPlayer),
+        Integer.toString(roundCount - roundWonPlayer));
+
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        ROBOT_NAME, Integer.toString(roundWonBot), Integer.toString(roundCount - roundWonBot));
   }
 }
