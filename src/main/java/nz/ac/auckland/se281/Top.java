@@ -18,6 +18,7 @@ public class Top implements Strategy {
 
   @Override
   public String chooseFinger() {
+    // count how many evens and odds player has played
     for (int i : history) {
       if (Utils.isEven(i)) {
         even++;
@@ -26,12 +27,23 @@ public class Top implements Strategy {
       }
     }
 
+    // if evens and odds are same amount, play random between 0 and 5
     finger = Integer.toString(Utils.getRandomNumberRange(0, 5));
 
-    if (choice == Choice.EVEN) {
-      finger = Integer.toString(Utils.getRandomOddNumber());
-    } else {
-      finger = Integer.toString(Utils.getRandomEvenNumber());
+    // play against the player's choice
+    if (even > odd) {
+      if (choice == Choice.EVEN) {
+        finger = Integer.toString(Utils.getRandomOddNumber());
+      } else {
+        finger = Integer.toString(Utils.getRandomEvenNumber());
+      }
+    }
+    if (odd > even) {
+      if (choice == Choice.EVEN) {
+        finger = Integer.toString(Utils.getRandomEvenNumber());
+      } else {
+        finger = Integer.toString(Utils.getRandomOddNumber());
+      }
     }
 
     return finger;

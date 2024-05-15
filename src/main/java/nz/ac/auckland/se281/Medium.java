@@ -21,7 +21,7 @@ public class Medium implements Bot {
 
   @Override
   public String playFinger(int round, int playerInput) {
-
+    // after round 3 use Top strategy, but Top strategy cannot use current player input
     if (round > 3) {
       this.setStrategy(new Top(choice, history));
     } else {
